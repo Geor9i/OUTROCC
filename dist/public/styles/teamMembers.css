@@ -1,0 +1,100 @@
+
+.team-members-main-container {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    width: 90%;
+    height: 90vh;
+    margin: auto;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgba(0, 0, 0, 0.233);
+    border-radius: 27px;
+  }
+  
+  
+  .team-members-main-container-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    height: 5vh;
+  }
+  .team-members-main-container-header h2 {
+    margin: 0;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    color: #4a4a4a;
+    font-size: 2rem;
+  }
+  
+  .team-members-container {
+    width: 80%;
+    height: 80%;
+    overflow: auto;
+  }
+  
+  .team-members {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    margin: 1rem 0;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  
+  .member-header {
+    display: grid;
+    grid-template-columns: 50% 1fr;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 3rem;
+    color: rgb(70, 70, 70);
+    border: 2px solid transparent rgb(0, 0, 0);
+    border-bottom: 2px solid rgb(0, 0, 0);
+    text-align: center;
+    margin-bottom: 1rem;
+  } 
+  .member-header h3{
+    margin: 0;
+  }
+  
+  .member {
+    display: grid;
+    grid-template-columns: 50% 1fr;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 4rem;
+    background-color: rgb(233, 233, 233);
+    border-radius: 11px;
+    color: rgb(70, 70, 70);
+    border: 2px solid transparent rgba(0, 0, 0, 0.60);
+    border-bottom: 1px solid  rgba(0, 0, 0, 0.60);
+    cursor: pointer;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+  
+  .add-member-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40vw;
+    height: 4rem;
+    box-sizing: border-box;
+  }
+  .add-member {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    background-color:rgb(255, 223, 117);
+    border-radius: 11px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  

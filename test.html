@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="test.css">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+             <div class="menu-button" >
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+            <div class="side-menu-container" ></div>
+                <div class="side-menu">
+                    <nav class="nav">
+                        <div class="home-button">
+                            <a href="/" ><h3>OUTROCC</h3></a>
+                        </div>
+                        <a href="/performance-tracker">Performance tracker</a>
+                        <a href="/team-members">Team members</a>
+                        <a href="/audits" >Audits</a>
+                    </nav>
+                </div>
+                <div class="user-menu-container">
+                    <div class="user-menu-nav"><h4>M</h4></div>
+                    <div class="user-menu inactive">
+                        <div class="user-menu-email-container"><h4>maria@abv.bg</h4></div>
+                        <div class="user-menu-account-container">
+                            <div><a href="/account">Account</a></div>
+                            <div><a>Logout</a></div>
+                        </div>
+                    </div>
+               
+    </header>
+    <main>
+      <section id="create">
+        <div class="form">
+          <h2>Create Employee</h2>
+          <form class="create-form" @submit=${submitHandler}>
+            <input
+              type="text"
+              name="first-name"
+              id="first-name"
+              placeholder="First Name"
+            />
+            <input
+              type="text"
+              name="surname"
+              id="surname"
+              placeholder="Surname"
+            />
+            <div class="form-checklist">
+              <h2>Trained Position</h2>
+              <div class="position-check">
+                ${positions.length > 0
+                ? positions.map(el => html`
+                 <div class="position-container">
+                  <label for="${el.name}">${el.name}</label>
+                  <input type="checkbox" name=${el.name}/>
+                </div>
+                `)
+                : html`There are no positions yet!`
+                }
+               
+              </div>
+             
+              </div>
+            <button type="submit">Add Employee</button>
+          </form>
+        </div>
+      </section>
+    </main>
+    
+</body>
+</html>

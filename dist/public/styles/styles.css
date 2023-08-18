@@ -1,0 +1,12 @@
+@import "navigation.css";
+@import "form.css";
+@import "dashboard.css";
+@import "details.css";
+@import "mainScreen.css";
+@import "account.css";
+@import "teamMembers.css";
+
+:root {
+  --text-color: rgb(60, 60, 60);
+  --link-color: rgb(255, 214, 30); 
+}
