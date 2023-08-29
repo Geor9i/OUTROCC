@@ -1,0 +1,126 @@
+                                                        OUTROCC
+
+                                                        ## MAIN GOAL ##
+
+                    An app to track and improve team member store procedure knowledge and performance through testing, stats and progress.
+                    Based on the ROCC Process!
+
+                                                    ## APP REQUIREMENTS ##
+
+
+                    1. User Profiles
+                        - Should have limited user profiles to link all store shift-leaders in the app. 
+                        - Accounts should be email based with the ability to change your data or delete your account!
+                        - There should be two types of accounts - Shift Runners and Admin:
+                            * Shift-runners should have access to all data and be able to perform employee tests + audits.
+                            * Admins should have shift-runner access + be able to modify data such as delete or add users, delete tests. 
+                    
+                    2. Team member section
+                        - View general list of all team members and their position
+                        - Provide Details per member:
+                            * Last audit performance
+                            * Employee current score ( based on their past audit performance & demonstrated knowledge of procedures during tests ( See details below ) )
+                            * Display personal breaches in procedure which evaluate to LEVEL 3 and remedy only after 3 tests of non-displayed breaches. 
+                            * Display repeated ( 2 minimum ) personal breaches in procedures which evaluate to LEVEL 1 and remedy only after 3 tests of non-displayed breaches.
+                                [ IF the same breach has been recorder up to five times (3 times for LEVEL 3) in sequence the APP should put the person in quarantine ( See Details below ) ]
+                        - Should be able to add and remove team-members [ Only for Admins ]
+                        - Members should be added into their app with the following data: 
+                            * First Name
+                            * Surname
+                            * Position/s
+                        - Should have a button in the member details section to initiate a 1 on 1 examination!
+                    3. Store Performance section
+                        - Should provide general stats of store performance and its current ROCC Score forecast:
+                            * Average store audit score out of all audits
+                            * Average store members test performance
+                            * Average store members audit procedure observation scores
+                            * ROCC score forecast based on last week's audits + members ability to retain knowledge from coaching  (individual knowledge retention score)
+                                        [ Show individual member score + IKR ]
+                        - List most commonly broken procedures [ LEVEL 3 first, followed by LEVEL 1 ] 
+                        - List procedures which are affirmed as retained by all [ LEVEL 3 first, followed by LEVEL 1 ] 
+                        - Should list all team members which are consistently good performers 
+                        - Should list all team members which are consistently in breach of procedures 
+                   
+                    4. Store Audit Section
+                        - Should show last audit performance and who executed it:
+                            * Procedure breaches and the person in question 
+                            * Team member rating evolution in context of last audit
+                        - Should provide the ability for a full store Audit
+                            * The user will be prompted to select all members on shift 
+                            * the audit should have 2 sections: 
+                                ** Store state [ Mark the current state of the store in setings where a mark cannot be scored on an individual basis based on procedural evaluation prompts ]
+                                ** Team member performance:
+                                    @ questionaire based
+                                    @ Demonstated procedures
+                            * The audit should be considered a fail after a discovered LEVEL 3, but should continue until the end
+
+                    
+
+
+                                                            ## DETAILS ##
+
+                                                            1. STORE AUDIT
+
+                    
+                Initial Page
+                                                    2 Tabs  ==> Last Audit && New Audit
+                                        
+                        Last Audit:
+                                    => Last Audit score
+                                    => List of broken procedures + employees responsible  [ LEVEL 3 first ]
+                                    => Team members listed | individual score evolution from last audit  
+                                    => Store journey score evolution from last audit 
+                                    
+
+                        New Audit:
+                                    => Select Shift start time + end time
+                                    => Select Employees on shift Section:
+                                                                            -> Search bar [ Employee search ] 
+                                                                            -> List om employees [ selectable ]
+                                                                            -> Add Button [ Add to audit ]
+                                    
+                                    => Selected Employees:
+                                                            -> Delete Button [ Remove from audit ]
+
+
+                                    => Begin Audit Button:
+                                                            -> Prompt "Are you sure you would like to begin?" -->> Data gets sent to the server that audit has begun 
+
+                Audit 
+                                    Side menu changes to accommodate audit  
+                                    3 options in side menu ==>   Store || Team Members || Complete Audit [ Stop Audit ] 
+                
+                        Store section: 
+                                        => Leads to a screen prompt where user selects the area of the store they are in:
+
+                                            | External | | Lobby |
+                                            | FOH |  | MOH |
+                                                    | BOH |
+                                          | team room | | Toilet |
+                                                
+                                                After Selection
+                                                    
+                                                    -> Another link gets added to the side menu that lists all completed questions ->> onclick goes back to that section and allows a redo
+
+                                                    -> The app goes through randomized questions based on the shop state 
+                                                    -> As the user answers the data gets sent to the server and updated
+                                                    -> User continues through the area section one by one until completion
+                                                    -> if audit gets disrupted, on re-entry:
+                                                                                                --> audit continues [ if within shift duration ]
+                                                                                                --> audit stops and results get calculated 
+
+                        Team member section:
+                                        
+                                                => Leads to a screen prompt where user selects the Team member:
+                                                => This leads to a two tab section:
+                                                                                    -> questionnaire 
+                                                                                    -> procedural demonstration:
+                                                                                                                    ->> this section checks all store sections where employee is responsible and marks them
+                                                                                    -> User continues through the team members one by one until completion
+                                                                                    -> if audit gets disrupted, on re-entry:
+                                                                                                --> audit continues [ if within shift duration ]
+                                                                                                --> audit stops and results get calculated 
+
+                        Complete Audit:
+                                        => onclick all the results get pulled from the database and calculated
+                                        => Screen reverts to home

@@ -6,18 +6,16 @@ export class TeamMembersComponent {
         this.db = db;
         this.util = util;
         this.renderHandler = renderHandler;
-         this.templateFunction = templateFunction;
-         this.router = router;
-         this.showView = this._showView.bind(this);
-         this.getMembers = this._getMembers.bind(this);
+        this.templateFunction = templateFunction;
+        this.router = router;
+        this.showView = this._showView.bind(this);
+        this.getMembers = this._getMembers.bind(this);
     }
 
     async _showView(ctx) {
-        let members = this.getMembers();
+        let members = await this.getMembers();
         let template = this.templateFunction(members);
-        if (ctx.user) {
-            this.renderHandler(template);
-        }
+        this.renderHandler(template);
     }
     
     async _getMembers () {

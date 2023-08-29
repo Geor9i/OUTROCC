@@ -1,6 +1,8 @@
 import { html } from "../../../node_modules/lit-html/lit-html.js";
 
-export const navTemplate = (user, userData, logoutHandler, showSideMenu, hideSideMenu, showUserMenu, hideUserMenu) => html`
+
+
+export const navInAuditTemplate = (user, userData, logoutHandler, showSideMenu, hideSideMenu, showUserMenu, hideUserMenu) => html`
             ${user
             ? html`
              <div class="menu-button" @click=${showSideMenu}>
@@ -17,9 +19,10 @@ export const navTemplate = (user, userData, logoutHandler, showSideMenu, hideSid
                         <div class="home-button">
                             <a href="/" @click=${hideSideMenu}><h3>OUTROCC</h3></a>
                         </div>
-                        <a href="/performance-tracker" @click=${hideSideMenu}>Performance tracker</a>
-                        <a href="/team-members" @click=${hideSideMenu}>Team members</a>
-                        <a href="/audit" @click=${hideSideMenu}>Audits</a>
+                        <a href="general" @click=${hideSideMenu}>General Restaurant</a>
+                        <a href="FOH" @click=${hideSideMenu}>FOH</a>
+                        <a href="MOH" @click=${hideSideMenu}>MOH</a>
+                        <a href="BOH" @click=${hideSideMenu}>BOH</a>
                     </nav>
                 </div>
                 ${user

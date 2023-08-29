@@ -1,3 +1,5 @@
+import { UserReadableError } from "../../errors/UserReadableError.js";
+
 export class AccountComponent {
     constructor (auth, fireStore, db, util, renderHandler, templateFunction, router) {
         this.auth = auth;
@@ -10,6 +12,7 @@ export class AccountComponent {
         this.deleteHandler = this._deleteHandler.bind(this);
         this.editInfoHandler = this._editInfoHandler.bind(this);
         this.editEmailHandler = this._editEmailHandler.bind(this);
+        this.changePassword = this._changePassword.bind(this);
         this.router = router;
     }
 
@@ -21,7 +24,7 @@ export class AccountComponent {
         let docSnapshot = await this.fireStore.getDoc(userDocRef);
         let employee = docSnapshot.data();
 
-        let template = this.templateFunction(employee, this.editInfoHandler, this.editEmailHandler, this.deleteHandler);
+        let template = this.templateFunction(employee, this.editInfoHandler, this.editEmailHandler, this.changePassword, this.deleteHandler);
         this.renderHandler(template);
     }
 
@@ -38,7 +41,9 @@ export class AccountComponent {
             await this.fireStore.deleteDoc(this.fireStore.doc(this.db, "users", employee.uid));
             this.router.navigate('/')
         }catch(err) {
-            alert(err)
+            if (err instanceof UserReadableError) {
+                alert(err)
+            }
         }
         this.router.navigate('/')
 
@@ -49,6 +54,7 @@ export class AccountComponent {
         let form = e.target;
         let formData = this.util.getFormData(form);
         let { firstName, surname } = formData;
+        try {
             if (this.util.formValidator(formData)) {
                 let result = confirm('Are you Sure?');
                 if (!result) {
@@ -61,7 +67,12 @@ export class AccountComponent {
                 })
                     this.router.navigate('/');
                 }
-        this.router.navigate('/')
+        this.router.navigate('/');
+            }catch(err) {
+                if (err instanceof UserReadableError) {
+                    alert(err)
+                }
+            }
 
     }
 
@@ -69,24 +80,46 @@ export class AccountComponent {
         e.preventDefault();
         let form = e.target;
         let formData = this.util.getFormData(form);
-        if (this.util.formValidator(formData)) {
-        let result = confirm('Are you Sure?');
-        if (!result) {
-            return
-        }
         try {
-            let { email } = formData;
-            const auth = this.auth.getAuth();
-            await this.auth.updateEmail(auth.currentUser, email);
-            let uid = employee.uid;
-            const docRef = this.fireStore.doc(this.db, 'users', uid);
-                await this.fireStore.updateDoc(docRef, {
-                    email: email,
-                })
-            this.router.navigate('/');
-        }catch(err) {
-            alert(err)
+            if (this.util.formValidator(formData)) {
+            let result = confirm('Are you Sure?');
+            if (!result) {
+                return
+            }
+                let { email } = formData;
+                const auth = this.auth.getAuth();
+                await this.auth.updateEmail(auth.currentUser, email);
+                let uid = employee.uid;
+                const docRef = this.fireStore.doc(this.db, 'users', uid);
+                    await this.fireStore.updateDoc(docRef, {
+                        email: email,
+                    })
+                this.router.navigate('/');
+            }
+        } catch(err) {
+            if (err instanceof UserReadableError) {
+                alert(err)
+            }
         }
     }
+
+    async _changePassword(e) {
+        e.preventDefault();
+        let form = e.target;
+        let formData = this.util.getFormData(form);
+        try {
+            if (this.util.formValidator(formData, 6, 'repass')) {
+            let result = confirm('Change you password?');
+            if (!result) {
+                return
+            }
+                let { password } = formData;
+                const auth = this.auth.getAuth();
+                await this.auth.updatePassword(auth.currentUser, password);
+                this.router.navigate('/');
+            }
+        }catch(err) {
+                alert(err)
+        }
     }
 }

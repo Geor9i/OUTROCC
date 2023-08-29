@@ -10,7 +10,7 @@ body {
   padding: 0;
   overflow: auto;
   overflow-x: hidden;
-  width: 97vw;
+  width: 100vw;
   font-family: 'Merienda', cursive;
 }
 
@@ -53,6 +53,14 @@ header {
     margin: 0;
   color: white;
 }
+.user-menu-cover {
+  position: absolute;
+  overflow: hidden;
+  /* transition: width 0.4s ease; */
+  width: 0%;
+  height: 100%;
+  z-index: 1;
+}
 
 .user-menu {
     position: absolute;
@@ -70,6 +78,7 @@ header {
     border-radius: 3%;
     background-color: rgb(250, 249, 245);
 }
+
 .user-menu a {
     text-decoration: none;
     cursor: pointer;
@@ -255,6 +264,3 @@ footer p {
   text-transform: capitalize;
 }
 
-.inactive {
-  display: none;
-}

@@ -1,6 +1,7 @@
-import { html } from "../../../node_modules/lit-html/lit-html.js";
+import { html } from "../../../node_modules/lit-html/lit-html.js"; 
 
-export const navTemplate = (user, userData, logoutHandler, showSideMenu, hideSideMenu, showUserMenu, hideUserMenu) => html`
+
+export const navAuditTemplate = (user, userData, logoutHandler, showSideMenu, hideSideMenu, showUserMenu, hideUserMenu, outstandingAudit) => html`
             ${user
             ? html`
              <div class="menu-button" @click=${showSideMenu}>
@@ -17,9 +18,13 @@ export const navTemplate = (user, userData, logoutHandler, showSideMenu, hideSid
                         <div class="home-button">
                             <a href="/" @click=${hideSideMenu}><h3>OUTROCC</h3></a>
                         </div>
-                        <a href="/performance-tracker" @click=${hideSideMenu}>Performance tracker</a>
-                        <a href="/team-members" @click=${hideSideMenu}>Team members</a>
-                        <a href="/audit" @click=${hideSideMenu}>Audits</a>
+                        <a href="/audits" @click=${hideSideMenu}>All Audits</a>
+                        <a href="/new-audit" @click=${hideSideMenu}>New Audit</a>
+                        ${outstandingAudit !== undefined
+                        ? html`
+                        <a href="/audit/${outstandingAudit.id}" @click=${hideSideMenu}>Continue Audit</a>`
+                        : html``
+                        }
                     </nav>
                 </div>
                 ${user

@@ -1,4 +1,5 @@
 @import "navigation.css";
+@import "audit.css";
 @import "form.css";
 @import "dashboard.css";
 @import "details.css";
@@ -10,3 +11,4 @@
   --text-color: rgb(60, 60, 60);
   --link-color: rgb(255, 214, 30); 
 }
+

@@ -27,7 +27,7 @@ export class CreateEmployeeComponent {
         let { firstName, surname, ...positions } = formData;
         try {
             if (this.util.formValidator(formData)) {
-                const collectionRef = this.fireStore.collection(this.db, "employees");
+                const collectionRef = this.fireStore.collection(this.db, "members");
                 await this.fireStore.addDoc(collectionRef, {
                     firstName: firstName,
                     surname: surname,

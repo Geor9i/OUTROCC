@@ -2,7 +2,7 @@
 
 :root {
     --text-color: rgb(60, 60, 60);
-    --link-color: rgb(255, 214, 30); 
+    --link-color: rgb(250, 223, 104); 
   }
 
 body {
@@ -511,3 +511,270 @@ margin-bottom: 0px;
 }
 
 
+
+  /* MEMBER DETAILS */
+
+
+  .member-details-main-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: auto;
+    width: 90vw;
+    height: 90vh;
+    border-radius: 21px;
+    background-color: #dadada;
+  }
+  .member-details-main-container h2,
+  .member-details-main-container h3,
+  .member-details-main-container h4,
+  .member-details-main-container h5 {
+    margin: 0.5rem;
+  }
+
+  .member-details-name-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: 5rem;
+    color: rgb(133, 133, 133);
+    border: 2px solid transparent rgb(0, 0, 0);
+    border-bottom: 2px solid rgb(0, 0, 0);
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .member-details-positions-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: auto;
+    color: rgb(70, 70, 70);
+    background-color: #a3a3a3;
+    border: 2px solid transparent rgb(0, 0, 0);
+    border-radius: 21px;
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  .member-details-performance-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    width: 90%;
+    height: auto;
+    color: rgb(70, 70, 70);
+    background-color: #d3d3d3;
+    border: 2px solid transparent rgb(0, 0, 0);
+    border-radius: 21px;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+
+  .performance-info-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    height: 3rem;
+    border-bottom: 1px solid black;
+    margin-bottom: 0.3rem;
+  }
+
+  .performance-info {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: auto;
+  }
+
+  .performance-info-text {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: auto;
+  }
+
+  .grade-text {
+    color: red;
+  }
+
+  .performance-details-btn {
+    display: flex;
+    background-color: var(--link-color);
+    color: white;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    border-radius: 21px;
+    height: auto;
+  }
+
+  .performance-test-btn {
+    display: flex;
+    margin-top: auto;
+    margin-bottom: 1rem;
+    background-color: rgb(248, 36, 36);
+    color: white;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    border-radius: 21px;
+    height: auto;
+  }
+
+  /* AUDIT */
+
+
+
+   .audit-form {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(180, 180, 180);
+  max-width: 440px;
+  margin: auto;
+  margin-top: 50px;
+  margin-bottom: 50px;
+
+  padding: 45px;
+  text-align: center;
+  border-radius: 10px;
+  border: 1px solid;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.audit-form * {
+  margin: 0.5rem;
+}
+
+.audit-shift-period {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.added-member {
+  margin: 0;
+}
+
+.audit-form input{
+  border-radius: 10px;
+  outline: 0;
+  background: #ffffff;
+  width: 100%;
+  height: auto;
+  border: 0;
+  margin: 0 0 5px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.add-member-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.audit-form select{
+  border-radius: 10px;
+  outline: 0;
+  background: #ffffff;
+  width: 80%;
+  height: 3rem;
+  border: 0;
+  margin: 0 0 5px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.audit-form button {
+  align-self: flex-start;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  width: 20%;
+  height: 3rem;
+  border-radius: 7px;
+  background-color: var(--link-color);
+}
+
+.audit-form .submit-btn {
+  align-self: center;
+  margin-top: 2rem;
+  width: 45%;
+  font-weight: bold;
+  color: white;
+  font-size: 1.5rem;
+  background-color: red;
+}
+
+
+.audit-main-container {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: rgb(221, 221, 221);
+  width: 100%;
+  height: 90vh;
+  border-radius: 7px;
+}
+
+.audit-question-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(208, 231, 253);
+  border-radius: 7px;
+  width: 100%;
+  height: 20%;
+}
+
+.audit-question {
+  font-size: 1.5rem;
+  color: green;
+}
+
+.audit-answer-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: 80%;
+  border-radius: 7px;
+  background-color: rgb(199 235 175);
+  overflow: auto;
+  border: 5px solid black;
+}
+
+.answer-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(233 106 60);
+  border: 2px solid white;
+  border-radius: 7px;
+  width: 80%;
+  height: 3rem;
+  color: white;
+  font-size: 2rem;
+  margin: 2rem;
+  cursor: pointer;
+}
+
+.answer-container p {
+  font-size: 1.5rem;
+  letter-spacing: 3px;
+  font-weight: bold;
+  font-family: 'cursive';
+}

@@ -36,42 +36,26 @@
                
     </header>
     <main>
-      <section id="create">
-        <div class="form">
-          <h2>Create Employee</h2>
-          <form class="create-form" @submit=${submitHandler}>
-            <input
-              type="text"
-              name="first-name"
-              id="first-name"
-              placeholder="First Name"
-            />
-            <input
-              type="text"
-              name="surname"
-              id="surname"
-              placeholder="Surname"
-            />
-            <div class="form-checklist">
-              <h2>Trained Position</h2>
-              <div class="position-check">
-                ${positions.length > 0
-                ? positions.map(el => html`
-                 <div class="position-container">
-                  <label for="${el.name}">${el.name}</label>
-                  <input type="checkbox" name=${el.name}/>
-                </div>
-                `)
-                : html`There are no positions yet!`
-                }
-               
-              </div>
-             
-              </div>
-            <button type="submit">Add Employee</button>
-          </form>
+     
+   <section>
+    <div class="audit-main-container">
+      <div class="audit-question-container">
+        <p class="audit-question">Chicken Prepared to standart</p>
+      </div>
+      <div class="audit-answer-container">
+        <div class="answer-container">
+          <p>Bruises</p>
         </div>
-      </section>
+        <div class="answer-container">
+          <p>Uncooked skin</p>
+        </div>
+        <div class="answer-container">
+          <p>Blown drums</p>
+        </div>
+      </div>
+    </div>
+   </section>
+  
     </main>
     
 </body>
