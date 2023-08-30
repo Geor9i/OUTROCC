@@ -46,7 +46,7 @@ export class NewAuditComponent {
         try {
             if (this.validateMembers(members)) {
                 let now = this.util.getFullDate();
-                let path = btoa(`${user.email}&&${now.fullDateCode}`);
+                let path = this.util.encoder(`${user.email}&&${now.fullDateCode}`);
                 const documentRef = this.fireStore.doc(this.db, "audits", path);
                 let settings = {
                     userEmail: user.email,

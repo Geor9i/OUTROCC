@@ -1,7 +1,7 @@
 import { html } from "../../../node_modules/lit-html/lit-html.js"; 
 
 
-export const navAuditTemplate = (user, userData, logoutHandler, showSideMenu, hideSideMenu, showUserMenu, hideUserMenu, outstandingAudit) => html`
+export const navAuditTemplate = (user, userData, logoutHandler, showSideMenu, hideSideMenu, showUserMenu, hideUserMenu, queryBuilder, categories, showTests, outstandingAudit) => html`
             ${user
             ? html`
              <div class="menu-button" @click=${showSideMenu}>
@@ -20,7 +20,7 @@ export const navAuditTemplate = (user, userData, logoutHandler, showSideMenu, hi
                         </div>
                         <a href="/audits" @click=${hideSideMenu}>All Audits</a>
                         <a href="/new-audit" @click=${hideSideMenu}>New Audit</a>
-                        ${outstandingAudit !== undefined
+                        ${outstandingAudit !== null
                         ? html`
                         <a href="/audit/${outstandingAudit.id}" @click=${hideSideMenu}>Continue Audit</a>`
                         : html``

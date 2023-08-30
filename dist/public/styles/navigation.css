@@ -176,6 +176,7 @@ header {
   height: 100vh;
   z-index: 1;
   transition: transform 0.2s ease; /* Apply transition to the transform property */
+  overflow: auto;
 }
 
 .side-menu-active {
@@ -200,7 +201,7 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: sp;
+  justify-content: center;
 }
 
 .home-button {
@@ -222,6 +223,7 @@ nav a {
   font-weight: 400;
   margin: 1rem 0;
   text-decoration: none; 
+  cursor: pointer;
 }
 @media(min-width: 40rem) {
   nav a {
@@ -264,3 +266,54 @@ footer p {
   text-transform: capitalize;
 }
 
+.audit-categories-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.audit-categories-container a {
+  margin: 1.5rem;
+}
+
+.audit-categories-arrow{
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+  cursor: pointer;
+}
+
+.left {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
+
+.down {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+
+.audit-categories-tests {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.test-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  margin: 0;
+  width: 100%;
+  height: 3rem;
+  color: rgb(255, 255, 255);
+  background-color: #777;
+  border: 1px solid black;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 7px;
+}

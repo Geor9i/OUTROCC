@@ -2,6 +2,22 @@ import { UserReadableError } from "../errors/UserReadableError.js";
 
 export class Util {
 
+    //URL
+
+    encoder(url, options = 'e') {
+        let encodeTool = {
+            e(url){
+                return encodeURIComponent(btoa(url));
+            },
+            d(url) {
+                return decodeURIComponent(atob(url));
+            } 
+        }
+        return encodeTool[options](url)
+    }
+
+    //FORMS
+
      getFormFieldsObj (form) {
         let fields = this.createElementArray(form, 'input');
         fields = fields.filter(el => el.value !== 'submit')

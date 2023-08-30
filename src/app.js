@@ -35,6 +35,7 @@ import { AuditComponent } from "./components/audit/audit.js";
 import { auditTemplate } from "./components/audit/auditTemplate.js";
 import { navInAuditTemplate } from "./components/nav/navInAuditTemplate.js";
 import { procedures } from "./Procedures.js";
+import { Search } from "./utils/search.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyBt8u_aSEENqHcRKrbxOKPbt_ZBLGJEN0A",
@@ -69,9 +70,10 @@ let renderNav = (template) => render(template, nav);
 
 //Services
 let util = new Util();
+let searchTests = new Search(procedures)
 
 //Components
-let navComponent = new NavComponent(auth, fireStore, db, util, renderNav, navTemplate, navAuditTemplate, navInAuditTemplate, router);
+let navComponent = new NavComponent(auth, fireStore, db, util, renderNav, navTemplate, navAuditTemplate, navInAuditTemplate, searchTests, router);
 
 let homeComponent = new HomeComponent(renderBody, homeTemplate);
 
@@ -97,7 +99,7 @@ let editComponent = new EditComponent(fireStore, db, renderBody, editTemplate, r
 
 let newAuditComponent = new NewAuditComponent(auth ,fireStore, db, util, renderBody, newAuditTemplate, procedures, router)
 
-let auditComponent = new AuditComponent(fireStore, db, util, renderBody, auditTemplate, procedures, router)
+let auditComponent = new AuditComponent(fireStore, db, util, renderBody, auditTemplate, procedures, searchTests, router)
 
 //Routing
 page('/index.html', '/');

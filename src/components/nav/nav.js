@@ -8,6 +8,7 @@ export class NavComponent {
     navTemplate,
     navAuditTemplate,
     navInAuditTemplate,
+    searchTests,
     router
   ) {
     this.auth = auth;
@@ -18,9 +19,15 @@ export class NavComponent {
     this.navTemplate = navTemplate;
     this.navAuditTemplate = navAuditTemplate;
     this.navInAuditTemplate = navInAuditTemplate;
+    this.searchTests = searchTests;
     this.router = router;
+    this.ctx;
+    this.categories;
     this.logoutHandler = this._logoutHandler.bind(this);
     this.showView = this._showView.bind(this);
+    this.getTests = this._getTests.bind(this);
+    this.showTests = this._showTests.bind(this);
+    this.queryBuilder = this._queryBuilder.bind(this);
     this.outstandingAudit = this._outstandingAudit.bind(this);
     this.navDisplay = this._navDisplay.bind(this);
     this.showUserMenu = this._showUserMenu.bind(this);
@@ -30,12 +37,16 @@ export class NavComponent {
   }
 
   async _showView(ctx, next) {
-    let path = ctx.path;
+    this.ctx = ctx;
+    this.categories = ['General', 'FOH', 'MOH', 'BOH'].reduce((acc, curr) => {
+      acc[curr] = this.getTests(curr);
+      return acc;
+    }, {});
     let auth = this.auth.getAuth();
     auth.onAuthStateChanged(async (user) => {
       ctx.user = user;
-      let outstandingAudit;
-      if (user && path.includes('audit')) {
+      let outstandingAudit = null;
+      if (user && ctx.path.includes('audit')) {
         outstandingAudit = await this.outstandingAudit(user);
       }
       let uid = user?.uid;
@@ -50,7 +61,7 @@ export class NavComponent {
         userData = docSnapshot.data();
         userData.initial = userData.firstName.slice(0, 1).toUpperCase();
       }
-      let navTemplate = this.navDisplay(ctx);
+      let navTemplate = this.navDisplay();
       this.renderHandler(navTemplate(
         user,
         userData,
@@ -59,15 +70,65 @@ export class NavComponent {
         this.hideSideMenu,
         this.showUserMenu,
         this.hideUserMenu,
+        this.queryBuilder,
+        this.categories,
+        this.showTests,
         outstandingAudit
       ));
       next();
     });
   }
 
-  _navDisplay(ctx) {
-    let path = ctx.path;
-    let querystring = ctx.querystring;
+  _showTests(e) {
+    let arrow = e.currentTarget;
+    let id = arrow.dataset.id;
+    let parent = arrow.parentElement;
+    let sibling = parent.nextElementSibling;
+    if (sibling && sibling.className === 'audit-categories-tests') {
+      sibling.remove()
+      arrow.className = `audit-categories-arrow left`;
+    } else {
+      let container = document.createElement('div');
+      container.className=`audit-categories-tests`;
+      let categoryTests = this.getTests(id);
+      categoryTests.forEach(el => {
+        let test = document.createElement('a');
+        test.className = 'test-link';
+        test.textContent = el.title;
+        container.appendChild(test)
+      })
+      parent.insertAdjacentElement('afterend', container);
+      arrow.className = `audit-categories-arrow down`;
+      container.addEventListener('click', (e) => {
+        e.preventDefault();
+        this.hideSideMenu();
+        this.queryBuilder(e, 'title');
+      })
+    }
+  }
+
+  _getTests(...params) {
+    let tests = this.searchTests.search(params);
+    return tests;
+  }
+
+  _queryBuilder(e, options = 'labels') {
+    let link = e.target;
+    let id = this.ctx.params.id;
+    let param = link.textContent
+    switch(options) {
+      case 'labels':
+        this.router.navigate(`/audit/${id}?label=${this.util.encoder(param)}`);
+      break;
+      case 'title':
+        this.router.navigate(`/audit/${id}?title=${this.util.encoder(param)}`);
+      break;
+    }
+  }
+
+  _navDisplay() {
+    let path = this.ctx.path;
+    let querystring = this.ctx.querystring;
     let result;
     let idBasedPath = path.substr(7);
     switch (path) {
@@ -99,7 +160,7 @@ export class NavComponent {
               data: lastDoc.data()
             };
         }
-        return undefined;
+        return null;
   }
 
   _showSideMenu() {
