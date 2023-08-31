@@ -53,7 +53,7 @@ export const procedures = [
     labels: ["restroom", "toilet"],
   },
   {
-    title: "Only approved / not spoiled ingredients used",
+    title: "Only approved, not spoiled ingredients used",
     score: 3,
     options: ["Milk", "Salads", "Chicken products", "Cheese", "Bread"],
     labels: ["product", "ingredients", "quality", "general", "MOH", "BOH"],
@@ -245,7 +245,7 @@ export const procedures = [
     labels: ["chicken", "food safety", "product", "BOH", "label", "use by"],
   },
   {
-    title: "Manipulation of EPCS / PCS / QPM or falsification of records",
+    title: "Manipulation of EPCS, PCS, QPM or falsification of records",
     score: 3,
     options: [
       "Fillet",

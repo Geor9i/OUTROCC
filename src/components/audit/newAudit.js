@@ -44,7 +44,7 @@ export class NewAuditComponent {
             }
         })
         try {
-            if (this.validateMembers(members)) {
+            if (this.validatePositions(members) && this.validateShift(shiftStart, shiftEnd)) {
                 let now = this.util.getFullDate();
                 let path = this.util.encoder(`${user.email}&&${now.fullDateCode}`);
                 const documentRef = this.fireStore.doc(this.db, "audits", path);
@@ -54,8 +54,9 @@ export class NewAuditComponent {
                     startTime: now.time,
                     shiftStart: shiftStart,
                     shiftEnd: shiftEnd,
+                    categories: ['General' ,'FOH', 'MOH', 'BOH'],
                     auditEnd: false,
-                    tests: this.tests
+                    tests: {}
                 }
                 for (let member in members) {
                     let tm = members[member]
@@ -77,7 +78,21 @@ export class NewAuditComponent {
         }
     }
 
-    validateMembers(members) {
+    validateShift (shiftStart, shiftEnd) {
+        let now = new Date();
+        let O = now.getMinutes() < 10 ? '0' : '';
+        let time = `${now.getHours()}:${O}${now.getMinutes()}`;
+        time = this.util.clockToNum(time);
+        shiftStart = this.util.clockToNum(shiftStart);
+        shiftEnd = this.util.clockToNum(shiftEnd);
+        if (shiftStart <= time && shiftEnd >= time) {
+            return true;
+        }
+        throw new UserReadableError('The audit must be performed within the shift time period!')
+
+    }
+
+    validatePositions(members) {
         let check = {
             BOH:false,
             MOH:false,

@@ -18,7 +18,8 @@ export const navInAuditTemplate = (user, userData, logoutHandler, showSideMenu, 
                     <a href="/" @click=${hideSideMenu}><h3>OUTROCC</h3></a>
                 </div>
 
-                ${Object.keys(categories).map(el => {
+                ${ categories ? 
+                Object.keys(categories).map(el => {
                     return html`
                         <div class="audit-categories-container">
                             <a @click=${(e) => {
@@ -27,7 +28,8 @@ export const navInAuditTemplate = (user, userData, logoutHandler, showSideMenu, 
                             }}>${el}</a>
                             <div class="audit-categories-arrow left" data-id="${el}" @click=${showTests}></div>
                         </div>`
-                })}
+                }): html``
+                }
 
             </nav>
         </div>

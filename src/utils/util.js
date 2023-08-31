@@ -156,7 +156,7 @@ export class Util {
         }
     }
 
-    //Dates 
+    //Date & Time
 
     getFullDate() {
         const now = new Date();
@@ -176,6 +176,10 @@ export class Util {
             origin: now.getTime()
         }
 
+    }
+
+    clockToNum(clockTime) {
+        return Number(clockTime.replace(':', ''));
     }
 
 }

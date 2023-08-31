@@ -28,6 +28,7 @@ export class NavComponent {
     this.getTests = this._getTests.bind(this);
     this.showTests = this._showTests.bind(this);
     this.queryBuilder = this._queryBuilder.bind(this);
+    this.audit = null;
     this.outstandingAudit = this._outstandingAudit.bind(this);
     this.navDisplay = this._navDisplay.bind(this);
     this.showUserMenu = this._showUserMenu.bind(this);
@@ -38,16 +39,15 @@ export class NavComponent {
 
   async _showView(ctx, next) {
     this.ctx = ctx;
-    this.categories = ['General', 'FOH', 'MOH', 'BOH'].reduce((acc, curr) => {
-      acc[curr] = this.getTests(curr);
-      return acc;
-    }, {});
     let auth = this.auth.getAuth();
     auth.onAuthStateChanged(async (user) => {
       ctx.user = user;
-      let outstandingAudit = null;
       if (user && ctx.path.includes('audit')) {
-        outstandingAudit = await this.outstandingAudit(user);
+        this.audit = await this.outstandingAudit(user);
+        this.categories = this.audit?.data.categories.reduce((acc, curr) => {
+          acc[curr] = this.getTests(curr);
+          return acc;
+        }, {});
       }
       let uid = user?.uid;
       let userData = null;
@@ -73,7 +73,7 @@ export class NavComponent {
         this.queryBuilder,
         this.categories,
         this.showTests,
-        outstandingAudit
+        this.audit
       ));
       next();
     });
@@ -155,6 +155,7 @@ export class NavComponent {
         if (!querySnapshot.empty) {
             const docs = querySnapshot.docs
             const lastDoc = docs[docs.length - 1];
+            console.log(lastDoc.id);
             return {
               id: lastDoc.id,
               data: lastDoc.data()
