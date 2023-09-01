@@ -1,6 +1,6 @@
 import { html } from "../../../node_modules/lit-html/lit-html.js";
 
-export const navInAuditTemplate = (user, userData, logoutHandler, showSideMenu, hideSideMenu, showUserMenu, hideUserMenu, queryBuilder, categories, showTests) => html`
+export const navInAuditTemplate = (user, userData, logoutHandler, showSideMenu, hideSideMenu, showUserMenu, hideUserMenu, categories, showTests) => html`
     ${user
     ? html`
      <div class="menu-button" @click=${showSideMenu}>
@@ -17,20 +17,19 @@ export const navInAuditTemplate = (user, userData, logoutHandler, showSideMenu, 
                 <div class="home-button">
                     <a href="/" @click=${hideSideMenu}><h3>OUTROCC</h3></a>
                 </div>
-
-                ${ categories ? 
+                <div class="audit-categories-main-container">
+                ${categories ? 
                 Object.keys(categories).map(el => {
                     return html`
                         <div class="audit-categories-container">
-                            <a @click=${(e) => {
+                            <a class="category-link" @click=${(e) => {
                                 hideSideMenu();
-                                queryBuilder(e);
                             }}>${el}</a>
                             <div class="audit-categories-arrow left" data-id="${el}" @click=${showTests}></div>
                         </div>`
                 }): html``
                 }
-
+                </div>
             </nav>
         </div>
         ${user

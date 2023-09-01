@@ -27,7 +27,6 @@ export class NavComponent {
     this.showView = this._showView.bind(this);
     this.getTests = this._getTests.bind(this);
     this.showTests = this._showTests.bind(this);
-    this.queryBuilder = this._queryBuilder.bind(this);
     this.audit = null;
     this.outstandingAudit = this._outstandingAudit.bind(this);
     this.navDisplay = this._navDisplay.bind(this);
@@ -70,7 +69,6 @@ export class NavComponent {
         this.hideSideMenu,
         this.showUserMenu,
         this.hideUserMenu,
-        this.queryBuilder,
         this.categories,
         this.showTests,
         this.audit
@@ -81,7 +79,7 @@ export class NavComponent {
 
   _showTests(e) {
     let arrow = e.currentTarget;
-    let id = arrow.dataset.id;
+    let category = arrow.dataset.id;
     let parent = arrow.parentElement;
     let sibling = parent.nextElementSibling;
     if (sibling && sibling.className === 'audit-categories-tests') {
@@ -90,10 +88,11 @@ export class NavComponent {
     } else {
       let container = document.createElement('div');
       container.className=`audit-categories-tests`;
-      let categoryTests = this.getTests(id);
+      let categoryTests = this.getTests(category);
       categoryTests.forEach(el => {
         let test = document.createElement('a');
         test.className = 'test-link';
+        test.dataset.id = category;
         test.textContent = el.title;
         container.appendChild(test)
       })
@@ -102,7 +101,6 @@ export class NavComponent {
       container.addEventListener('click', (e) => {
         e.preventDefault();
         this.hideSideMenu();
-        this.queryBuilder(e, 'title');
       })
     }
   }
@@ -110,20 +108,6 @@ export class NavComponent {
   _getTests(...params) {
     let tests = this.searchTests.search(params);
     return tests;
-  }
-
-  _queryBuilder(e, options = 'labels') {
-    let link = e.target;
-    let id = this.ctx.params.id;
-    let param = link.textContent
-    switch(options) {
-      case 'labels':
-        this.router.navigate(`/audit/${id}?label=${this.util.encoder(param)}`);
-      break;
-      case 'title':
-        this.router.navigate(`/audit/${id}?title=${this.util.encoder(param)}`);
-      break;
-    }
   }
 
   _navDisplay() {
@@ -155,7 +139,6 @@ export class NavComponent {
         if (!querySnapshot.empty) {
             const docs = querySnapshot.docs
             const lastDoc = docs[docs.length - 1];
-            console.log(lastDoc.id);
             return {
               id: lastDoc.id,
               data: lastDoc.data()

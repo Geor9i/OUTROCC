@@ -12,9 +12,7 @@ import { RegisterComponent } from "./components/register/register.js";
 import { registerTemplate } from "./components/register/registerTemplate.js";
 import { Util } from "./utils/util.js";
 import { CreateEmployeeComponent } from "./components/createEmployee/createEmployee.js";
-import { SearchComponent } from "./components/search/search.js";
 import { EditComponent } from "./components/edit/edit.js";
-import { searchTemplate } from "./components/search/searchTemplate.js";
 import { createEmployeeTemplate} from "./components/createEmployee/createEmployeeTemplate.js";
 import { editTemplate } from "./components/edit/editTemplate.js";
 import { initializeApp } from 'firebase/app'
@@ -89,8 +87,6 @@ let dashboardComponent = new DashboardComponent(fireStore, db, renderBody, dashB
 
 let memberDetailsComponent = new MemberDetailsComponent(fireStore, db, util, renderBody, memberDetailsTemplate, router);
 
-let searchComponent = new SearchComponent(fireStore, db, util, getAuth, renderBody, searchTemplate, router);
-
 let createEmployeeComponent = new CreateEmployeeComponent(fireStore, db, util, renderBody, createEmployeeTemplate, router);
 
 let createPositionComponent = new CreatePositionComponent(fireStore, db, util, renderBody, createPositionTemplate, router);
@@ -111,7 +107,6 @@ page(`/member-details/:id`, memberDetailsComponent.showView);
 page(`/login`, loginComponent.showView);
 page(`/register`, registerComponent.showView);
 page(`/account`, accountComponent.showView);
-page(`/search`, searchComponent.showView);
 page(`/create-employee`, createEmployeeComponent.showView);
 page(`/create-position`, createPositionComponent.showView);
 page(`/edit/:id`, editComponent.showView);

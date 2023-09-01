@@ -1,6 +1,6 @@
 import { html } from "../../../node_modules/lit-html/lit-html.js";
 
-export const navTemplate = (user, userData, logoutHandler, showSideMenu, hideSideMenu, showUserMenu, hideUserMenu, queryBuilder, categories, showTests, outstandingAudit) => html`
+export const navTemplate = (user, userData, logoutHandler, showSideMenu, hideSideMenu, showUserMenu, hideUserMenu, categories, showTests, outstandingAudit) => html`
             ${user
             ? html`
              <div class="menu-button" @click=${showSideMenu}>

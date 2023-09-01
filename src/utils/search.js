@@ -13,6 +13,7 @@ export class Search {
                 continue;
             }
             let procedureLabels = Array.from(procedure.labels).map(el => el.toLowerCase());
+            let procedureOptions = Array.from(procedure.options).map(el => el.toLowerCase());
             let procedureTitle = [procedure.title.toLowerCase()];
             let counter = keyCount;
             for (let keyword of keywords) {
@@ -27,6 +28,12 @@ export class Search {
                     if (procedureTitle.includes(keyword)) {
                         counter--;
                     }
+                    break;
+                    case'option':
+                    if (procedureOptions.includes(keyword)) {
+                        counter--;
+                    }
+                    break;
                 }
                 
             }

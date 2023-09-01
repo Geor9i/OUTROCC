@@ -23,7 +23,9 @@ export class AuditComponent {
     }
 
    async _showView(ctx) {
-        this.id = ctx.path.replace('/audit/','');
+        this.id = encodeURIComponent(ctx.params.id);
+        let linkContainer = document.querySelector('.nav .audit-categories-main-container');
+        linkContainer.addEventListener('click',this.NavLinkHandler)
         try {
             this.data = await this.getData();
             this.scores = this.data.tests;
@@ -38,17 +40,26 @@ export class AuditComponent {
         }
     }
 
+    NavLinkHandler(e) {
+        e.preventDefault();
+        if (e.target.tagName === "A") {
+            let link = e.target;
+            let category = link.dataset.id;
+            let isCategory = link.className === 'category-link' ? true : false;
+        }
+    }
+
     _runAudit() {
         let categories = this.data.categories;
         //run audit in order of categories
         for (let category of categories) {
-            let tests = this.searchTests.search(category);
+            let tests = this.testCollection(category);
             for(let test of tests) {
-                console.log(test);
                 if (!this.scores.hasOwnProperty(category) || 
                 !this.scores[category].hasOwnProperty(test.title)
                 ){
-                    let template = this.templateFunction(category, test, this.testAnswer);
+                    let currentTest = this.testOptionsFilter(test, category);
+                    let template = this.templateFunction(category, currentTest, this.testAnswer);
                     this.renderHandler(template);
                     return
                 }
@@ -56,11 +67,38 @@ export class AuditComponent {
         }
     }
 
+    testCollection(category) {
+        let tests = this.searchTests.search(category);
+        const labelOrder = ["floor", "general", "product", "temperature", "health and safety", "brand standard"];
+        let result = [];
+        for(let label of labelOrder) {
+                let buffer = tests.filter(test => {
+                    if (test.labels.includes(label) && !result.includes(test)) {
+                        return true;
+                    }
+                })
+                result.push(...buffer);
+            }
+            return result;
+    }
+
+    testOptionsFilter(test, category) {
+        let result = JSON.parse(JSON.stringify(test))
+        let common = test.options.common;
+        let categoryTests = [];
+        if (test.options.hasOwnProperty(category)) {
+            categoryTests = test.options[category]
+        }
+        result.options = [...common, ...categoryTests];
+        return result;
+    }
+
     async _testAnswer(e) {
-        let element = e.target;
+        let element = e.currentTarget.children[0];
         let title = document.querySelector('.audit-question').textContent;
         let category = document.querySelector('.audit-question').dataset.category;
         let score = document.querySelector('.audit-question').dataset.id;
+        score = element.textContent === 'Not Observed' ? 'p' : score;
         try {
             let documentRef = this.fireStore.doc(this.db, 'audits', this.id);
             await this.fireStore.updateDoc(documentRef, {
